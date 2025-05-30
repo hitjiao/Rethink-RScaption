@@ -24,8 +24,8 @@ if __name__ == '__main__':
     argparser.add_argument('--candidate4', type=str, default=r'F:\pythonProject\geval-main\others\RS-llava\RS-llava-SydneyCaptions.json')
     argparser.add_argument('--candidate5', type=str, default=r'F:\pythonProject\geval-main\others\VHM\VHM_Sydney.json')
     argparser.add_argument('--reference', type=str, default=r'F:\pythonProject\geval-main\data_gt\sydney_gt.json')
-    argparser.add_argument('--key', type=str, default='sk-jMFeZdioK7urgkCMwZgo8P76ifj3VuH3UeoJ0g46TLDw3Hqd')
-    argparser.add_argument('--base', type=str, default='https://api.nuwaapi.com/v1')
+    argparser.add_argument('--key', type=str, default='')
+    argparser.add_argument('--base', type=str, default='')
     argparser.add_argument('--model', type=str, default='gpt-4o')
     args = argparser.parse_args()
     openai.api_key = args.key
