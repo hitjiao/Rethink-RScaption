@@ -1,0 +1,26 @@
+Evaluate the accuracy of the following five candidate sentences compared to the "Reference" and rank them based on the evaluation results.
+
+## Evaluation Criteria:
+
+Accuracy: Extract the main content of reference and candidates respectively, and compare them to determine whether they are accurate.
+
+## Candidates:
+1. {{candidate1}}
+2. {{candidate2}}
+3. {{candidate3}}
+4. {{candidate4}}
+5. {{candidate5}}
+
+## Reference:
+{{reference}}
+
+## Output Format:
+Choose a ranking for each candidate from [1,2,3,4,5], which cannot be repeated, and assign each sentence a ranking from 1 (most accuracy) to 5 (least accuracy), the higher the ranking, the better the sentence performs in terms of accuracy.
+## Instructions:
+1. Analyze each sentence against the evaluation criteria.
+2. Compare the sentences to determine their relative richness.
+3. Assign a rank to each candidate from 1 (most accuracy) to 5 (least accuracy).
+4. Format your answer as a five-digit string representing the ranking order.
+
+Only the final ranking is output, no process is required, please evaluate and provide the final ranking(Output five sorted numbers):
+

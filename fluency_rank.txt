@@ -1,0 +1,26 @@
+Evaluate the fluency of the following five candidate sentences and rank them based on the evaluation results.
+
+## Evaluation Criteria:
+1. **Sentence Structure**: Assess whether the sentence is complete and has a reasonable structure.
+2. **Grammatical Correctness**: Check the correct usage of words, tenses, and grammar.
+3. **Overall Coherence**: Determine if the sentence flows smoothly and has clear logic.
+
+## Candidates:
+1. {{candidate1}}
+2. {{candidate2}}
+3. {{candidate3}}
+4. {{candidate4}}
+5. {{candidate5}}
+
+
+## Output Format:
+Select a ranking from [1,2,3,4,5] for each candidate, which cannot be repeated,Assign a rank to each sentence from 1 (most fluent) to 5 (least fluent),The higher the ranking, the better the sentence performs in terms of fluency.
+
+## Instructions:
+1. Analyze each sentence against the three evaluation criteria.
+2. Compare the sentences to determine their relative fluency.
+3. Assign a rank to each candidate from 1 (most fluent) to 5 (least fluent).
+4. Format your answer as a five-digit string representing the ranking order.
+
+Only the final ranking is output, no process is required, please evaluate and provide the final ranking(Output five sorted numbers):
+
