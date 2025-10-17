@@ -2,7 +2,6 @@
 From Parameter-Efficient Fine-Tuning to
 Knowledge-Driven Training-Free Adapter
 
-**The code and prompts used for LLM-based metrics have been uploaded. Other code and the knowledge base will be updated  soon..........**
 
 To illustrate this discrepancy, as illustrated in Fig. 1, we project captions from several widely-used natural and RS
 datasets into a shared semantic space using MPNet and perform clustering analysis.  The results reveal stark differences:
