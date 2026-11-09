@@ -1,93 +1,46 @@
 # Rethinking Remote Sensing Image Captioning:
-From Parameter-Efficient Fine-Tuning to
-Knowledge-Driven Training-Free Adapter
+From Parameter-Efficient Fine-Tuning to Knowledge-Driven Training-Free Adapter
 
 ## LLM-based Evaluation
 
-This module evaluates the semantic quality of remote sensing image captions by comparing a generated caption (Candidate) with its corresponding ground-truth caption (Reference).
+We provide two LLM-based evaluation methods to assess the quality of remote sensing image captions.
 
-For each Candidate–Reference pair, the evaluation model generates multiple independent judgments using the evaluation prompt. Two criteria are considered:
+### 1. Ranking-based Evaluation
 
-- **Coverage:** Evaluates whether the Candidate covers the major objects, scene information, and important spatial relationships described in the Reference. Minor details may be omitted as long as the essential semantic content is preserved.
-- **Substitutability:** Evaluates whether the Candidate can serve as a valid alternative caption to the Reference by independently conveying the essential scene content and key semantic information without significant factual errors or unsupported claims.
+This method compares five candidate captions and ranks them according to four evaluation dimensions:
 
-The two criteria are evaluated independently. Linguistic fluency, writing style, and sentence length are not considered unless they affect semantic preservation or understanding.
+- **Accuracy:** Correctness of scene categories, object categories, object quantities, spatial relationships, and scene-related information.
+- **Fineness:** Specificity of object locations, spatial relationships, and fine-grained object categories.
+- **Fluency:** Sentence structure, grammatical correctness, and overall coherence.
+- **Richness:** Overall scene coverage and the diversity of visual details.
 
-### 1. Directory Structure
+For each dimension, the LLM ranks the five candidates and outputs a five-digit sequence, where each digit represents the rank of the corresponding candidate (1 = best, 5 = worst).
 
-```text
-.
-├── prompts/
-│   └── llm_judgement.txt
-├── data/
-│   ├── candidate.json
-│   └── reference.json
-├── results/
-│   └── judgement/
-├── llm_judgement.py
-└── README.md
-```
-
-### 2. Requirements
-
-Install the required dependency:
+**Run:**
 
 ```bash
-pip install openai
+python evaluate_all.py \
+    --candidate1 data/candidate1.json \
+    --candidate2 data/candidate2.json \
+    --candidate3 data/candidate3.json \
+    --candidate4 data/candidate4.json \
+    --candidate5 data/candidate5.json \
+    --reference data/reference.json \
+    --prompt_dir prompts/ \
+    --save_dir results/ranking \
+    --n 10
 ```
 
-Set your OpenAI API key as an environment variable:
+### 2. LLM-as-a-Judge Evaluation
 
-**Linux / macOS**
-```bash
-export OPENAI_API_KEY="your-api-key"
-```
+This method evaluates each Candidate against its corresponding Reference using two independent criteria:
 
-**Windows (PowerShell)**
-```powershell
-$env:OPENAI_API_KEY="your-api-key"
-```
+- **Coverage:** Whether the Candidate preserves the major objects, scene information, and important spatial relationships in the Reference.
+- **Substitutability:** Whether the Candidate can serve as a valid alternative caption while preserving the essential semantic content of the Reference.
 
-### 3. Input Data Format
+For each Candidate–Reference pair, the LLM generates five independent judgments (`n=5`). Each judgment returns two binary decisions (`Yes` or `No`), corresponding to Coverage and Substitutability.
 
-The evaluation requires two JSON files:
-
-- `candidate.json`: Generated captions.
-- `reference.json`: Corresponding reference captions.
-
-Both files should use the same sample IDs.
-
-Example:
-
-**candidate.json**
-```json
-{
-    "10001": [
-        "A residential area with several buildings and surrounding roads."
-    ],
-    "10002": [
-        "An airport with multiple aircraft on the runway."
-    ]
-}
-```
-
-**reference.json**
-```json
-{
-    "10001": [
-        "A dense residential area containing several buildings connected by roads."
-    ],
-    "10002": [
-        "An airport featuring multiple aircraft positioned near the runway."
-    ]
-}
-```
-
-Each sample ID corresponds to one Candidate–Reference pair.
-
-### 4. Evaluation
-
-Run the evaluation script:
+**Run:**
 
 ```bash
 python llm_judgement.py \
@@ -99,54 +52,11 @@ python llm_judgement.py \
     --n 5
 ```
 
-For Windows:
+### 3. Evaluation Results
 
-```bash
-python llm_judgement.py ^
-    --candidate data/candidate.json ^
-    --reference data/reference.json ^
-    --prompt_fp prompts/llm_judgement.txt ^
-    --save_dir results/judgement ^
-    --model gpt-4o ^
-    --n 5
-```
+Both methods save raw model outputs and aggregated statistics in JSON format.
 
-**Evaluation parameters:**
-
-| Parameter | Description | Default |
-|---|---|---|
-| `candidate` | Path to the generated captions | Required |
-| `reference` | Path to the reference captions | Required |
-| `prompt_fp` | Path to the evaluation prompt | Required |
-| `save_dir` | Directory for saving evaluation results | `results/judgement` |
-| `model` | LLM used for evaluation | `gpt-4o` |
-| `n` | Number of independent judgments per sample | `5` |
-| `temperature` | Sampling temperature | `2` |
-| `retry` | Maximum number of API request attempts | `5` |
-| `sleep` | Delay between samples, in seconds | `0.5` |
-
-Here, `n=5` means that the evaluation model generates five judgments for each Candidate–Reference pair. Each judgment independently returns two binary decisions: Coverage and Substitutability.
-
-### 5. Output
-
-The evaluation script generates two files:
-
-| File | Description |
-|---|---|
-| `judgement_results.json` | Stores the Candidate, Reference, raw model outputs, and parsed judgments for each sample. |
-| `judgement_statistics.json` | Stores the aggregate statistics for Coverage and Substitutability. |
-
-Each valid model response follows the format:
-
-```text
-{Yes, Yes}
-```
-
-The two answers correspond to Coverage and Substitutability, respectively.
-
-### 6. Evaluation Metrics
-
-For each criterion, the Yes Rate is calculated as:
+For LLM-as-a-Judge evaluation, the Yes Rate is calculated independently for each criterion:
 
 \[
 \text{Yes Rate} =
@@ -154,25 +64,9 @@ For each criterion, the Yes Rate is calculated as:
 \times 100\%
 \]
 
-where:
+Invalid outputs are excluded from the calculation.
 
-- \(N_{\text{Yes}}\) is the number of judgments labeled `Yes`.
-- \(N_{\text{Valid}}\) is the total number of successfully parsed `Yes` and `No` judgments.
-
-Coverage and Substitutability are calculated independently. Invalid or unparseable outputs are excluded from the corresponding valid judgment count.
-
-A higher Yes Rate indicates that the generated captions more consistently preserve the essential semantic content of the reference captions and satisfy the corresponding evaluation criterion.
-
-### 7. Reproducibility
-
-For reproducible evaluation, we recommend keeping the following settings consistent across experiments:
-
-- LLM model and model version.
-- Evaluation prompt.
-- Sampling parameters, including `temperature` and `n`.
-- Input Candidate and Reference datasets.
-
-The API key should be configured through an environment variable and should never be committed to the repository.
+**Note:** Set your API key through the `OPENAI_API_KEY` environment variable before running the scripts. For reproducibility, use consistent models, prompts, and sampling parameters across experiments.
 
 
 
