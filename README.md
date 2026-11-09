@@ -28,7 +28,7 @@ python evaluate_all.py \
     --reference data/reference.json \
     --prompt_dir prompts/ \
     --save_dir results/ranking \
-    --n 10
+    --n 5
 ```
 
 ### 2. LLM-as-a-Judge Evaluation
