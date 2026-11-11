@@ -133,7 +133,7 @@ python LLM_judgement.py \
 ## Datasets
 
 ### 1. Fine-grained Aircraft & Ship Dataset
-
+sha256:dc373aea7201eadb56214eaf4c28b44ea3f35efa310fa75f504918935af151b4
 **Aircraft (23 classes)**
 
 | Group                   | Classes                                               |
