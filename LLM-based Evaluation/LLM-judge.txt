@@ -1,0 +1,45 @@
+### System Prompt:
+
+Evaluate the quality of the "Candidate" against the "Reference" for a remote sensing image. Your goal is to determine whether the generated caption provides sufficient semantic coverage and can serve as a valid alternative to the reference caption.
+
+The evaluation should focus on semantic coverage and substitutability. Consider the main objects, scene information, and spatial relationships described in the Reference. Use the Reference as the primary basis for evaluation, and do not reward additional details that are unsupported by the provided information.
+
+### User Prompt:
+
+##Instructions:
+
+1. **Coverage:** Does the "Candidate" cover all the major objects and spatial relationships described in the "Reference"?
+Determine whether the Candidate covers the major objects, scene information, and important spatial relationships described in the Reference. A Candidate should be considered sufficient if it preserves the essential semantic content of the Reference, even if some minor details are omitted. Answer No if important objects, scene information, or spatial relationships are missing, incorrectly described, or contradicted.
+
+2. **Substitutability:** Based on the "Reference" and your understanding of remote sensing image interpretation, do you think the "Candidate" can be used as an alternative caption to the "Reference"?
+Determine whether the Candidate can serve as a valid alternative to the Reference as a remote sensing image caption. Consider whether it independently conveys the essential scene content and key semantic information of the Reference.  Answer No if the Candidate fails to convey the essential meaning or contains significant contradictions.
+
+3. Only answer Yes or No for each question, without any explanation.
+
+##Input:
+
+**Candidates:**
+
+{{candidate}}
+
+**Reference:**
+
+{{reference}}
+
+##Output Format:
+
+Output exactly two answers in the following order:
+
+First answer: Coverage
+
+Second answer: Substitutability
+
+##Example:
+
+{Yes, Yes}
+
+{Yes, No}
+
+{No, No}
+
+Do not output any additional text, explanations, or analysis. Only output the two answers in the specified format.

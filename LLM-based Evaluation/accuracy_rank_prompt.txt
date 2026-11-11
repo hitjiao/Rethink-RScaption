@@ -1,0 +1,47 @@
+**System Prompt:**
+
+Evaluate the accuracy of the following five candidate captions by comparing them with the Reference. Rank the candidates according to their factual accuracy in describing the remote sensing image.
+
+**Accuracy:** Extract the main semantic content of the Reference and each candidate, respectively, and compare them to determine whether the candidates accurately describe the image content. Focus on the correctness and consistency of scene categories, object categories, object quantities, spatial relationships, regional compositions, and scene-related information. Penalize factual errors, contradictions, and unsupported claims. The evaluation should focus exclusively on accuracy, rather than fluency or richness.
+
+**User Prompt:**
+
+## Instructions:
+
+1. Analyze the main semantic content of the Reference, identifying its key scene information, objects, quantities, spatial relationships, and other relevant visual details.
+2. Evaluate each candidate independently by comparing its semantic content with the Reference.
+3. Assess whether each candidate correctly describes the main content of the Reference. Consider omissions of important information, incorrect object identification, inaccurate quantities or spatial relationships, and unsupported or contradictory descriptions.
+4. Rank the five candidates according to their overall accuracy. A candidate that preserves the key information of the Reference and contains fewer factual errors should receive a better rank.
+5. Do not give higher scores simply because a candidate is longer, more detailed, or more fluent. Only factual accuracy should determine the ranking.
+6. Assign a unique rank to each candidate, from 1 (most accurate) to 5 (least accurate). Each rank must be used exactly once.
+
+## Input:
+
+**Candidates:**
+
+1. {{candidate1}}
+2. {{candidate2}}
+3. {{candidate3}}
+4. {{candidate4}}
+5. {{candidate5}}
+
+**Reference:**
+
+{{reference}}
+
+## Output Format:
+
+Output only a five-digit string representing the ranks assigned to the candidates in their original order.
+
+The first digit represents the rank of Candidate 1, the second digit represents the rank of Candidate 2, and so on.
+
+Each digit must be a unique integer from 1 to 5, with no repetition.
+
+For example, `24153` means:
+- Candidate 1: Rank 2
+- Candidate 2: Rank 4
+- Candidate 3: Rank 1
+- Candidate 4: Rank 5
+- Candidate 5: Rank 3
+
+Do not output explanations, analysis, or any additional text. Only output the final five-digit ranking string.

@@ -1,0 +1,49 @@
+### System Prompt:
+
+Evaluate the richness of the following five candidate captions and rank them based on the evaluation results.
+
+**Richness:** Analyze the descriptive content of each candidate and compare them to determine their level of richness. Focus on two aspects: overall scene coverage and detailed element coverage. A candidate that provides a more comprehensive description of the overall scene and covers more visual elements and details should receive a better ranking. The evaluation should focus exclusively on richness, rather than factual accuracy, descriptive fineness, or linguistic fluency.
+
+### User Prompt:
+
+## Evaluation Criteria:
+
+1. **Overall Perspective:** Evaluate whether the candidate provides a comprehensive description of the overall scene in the remote sensing image. Consider the extent to which it covers the main scene and its overall composition.
+
+2. **Detail Perspective:** Evaluate the number and variety of visual elements covered by the candidate. A candidate that describes more elements and provides broader coverage of the image details should receive a better ranking.
+
+## Instructions:
+
+1. Analyze each candidate independently against the two evaluation criteria.
+2. Evaluate the coverage of the overall scene and the number and variety of visual elements described in each candidate.
+3. Compare the candidates to determine their relative richness. Candidates that cover more aspects of the overall scene and describe more visual elements should receive better rankings.
+4. Do not evaluate candidates based on linguistic fluency or descriptive fineness. Focus exclusively on the breadth and coverage of the descriptive content.
+5. Assign a unique rank to each candidate, from 1 (richest) to 5 (least rich). Each rank must be used exactly once.
+
+## Input:
+
+**Candidates:**
+
+1. {{candidate1}}
+2. {{candidate2}}
+3. {{candidate3}}
+4. {{candidate4}}
+5. {{candidate5}}
+
+## Output Format:
+
+Output only a five-digit string representing the ranks assigned to the candidates in their original order.
+
+The first digit represents the rank of Candidate 1, the second digit represents the rank of Candidate 2, and so on.
+
+Each digit must be a unique integer from 1 to 5, with no repetition.
+
+For example, `24153` means:
+
+- Candidate 1: Rank 2
+- Candidate 2: Rank 4
+- Candidate 3: Rank 1
+- Candidate 4: Rank 5
+- Candidate 5: Rank 3
+
+Do not output explanations, analysis, or any additional text. Only output the final five-digit ranking string.

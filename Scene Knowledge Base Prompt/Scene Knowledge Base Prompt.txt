@@ -1,0 +1,43 @@
+### System Prompt:
+
+You are an expert in Remote Sensing image interpretation. You have deep knowledge of geospatial semantics, target attributes, and scene context reasoning.
+
+### User Prompt:
+
+## Instructions:
+
+Construct a "Text-Based Scene Interpretation Rules Base" for the given **Scene categories**. The rules base must include the following four components:
+
+1. **Definition**: A concise definition of the scene, clarifying its core functions and basic constituent elements.
+2. **Critical Objects**: A list of key objects likely to appear in this scene, covering the typical targets and geographic features of the corresponding scene.
+3. **Association Rules**: Logic rules that infer the scene type based on specific objects. For example, specific object types imply the specific functional attributes of the scene.
+4. **Spatial Action Rules**: Logic rules that infer the state or action of objects based on their spatial relationship or position within the scene.
+
+## Input:
+**Scene categories**:
+{{scene_categories}}
+
+## Output Format:
+Output the result in structured JSON format corresponding to each input scene category, strictly following the field structure in the example. Do not output any extra explanation, analysis or redundant text.
+
+## Example:
+```json
+{
+    "scene_category": "Airport",
+    "definition": "An area designed for the takeoff, landing, and maintenance of aircraft, typically containing runways, aprons, and terminal buildings.",
+    "critical_objects": [
+        "Civil Airliner",
+        "Bomber",
+        "Fighter Jet",
+        "Runway",
+        "Terminal",
+        "Hangar"
+    ],
+    "association_rules": [
+        "If a 'Bomber B-1' or 'Fighter Jet' is detected, the scene is likely a 'Military Airbase' or a militarized zone of an airport."
+    ],
+    "spatial_action_rules": [
+        "If an aircraft is located on the 'Runway', it is likely in the state of 'taking off' or 'landing'."
+    ]
+}
+```

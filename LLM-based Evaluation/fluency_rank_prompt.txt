@@ -1,0 +1,51 @@
+### System Prompt:
+
+Evaluate the fluency of the following five candidate captions and rank them based on the evaluation results.
+
+**Fluency:** Analyze the linguistic quality of each candidate and compare them to determine their level of fluency. Focus on three aspects: sentence structure, grammatical correctness, and overall coherence. A candidate with a complete and well-structured sentence, correct grammar, and smooth, logically coherent expression should receive a better ranking. The evaluation should focus exclusively on fluency, rather than factual accuracy, descriptive fineness, or richness.
+
+### User Prompt:
+
+## Evaluation Criteria:
+
+1. **Sentence Structure:** Assess whether the sentence is complete, well-organized, and structurally reasonable. Consider whether its components are arranged appropriately and whether the sentence is easy to understand.
+
+2. **Grammatical Correctness:** Evaluate the correct usage of words, tenses, and grammatical structures. Identify grammatical errors, inappropriate word usage, and incorrect sentence constructions.
+
+3. **Overall Coherence:** Determine whether the sentence flows smoothly and presents its information in a clear and logically coherent manner. Assess whether the ideas are naturally connected and easy to follow.
+
+## Instructions:
+
+1. Analyze each candidate independently against the three evaluation criteria.
+2. Evaluate the sentence structure, grammatical correctness, and overall coherence of each candidate.
+3. Compare the candidates to determine their relative fluency. Candidates with more complete sentence structures, fewer grammatical errors, and smoother, more coherent expressions should receive better rankings.
+4. Do not reward candidates merely for being longer or containing more descriptive information. Focus exclusively on linguistic fluency rather than factual accuracy or descriptive detail.
+5. Assign a unique rank to each candidate, from 1 (most fluent) to 5 (least fluent). Each rank must be used exactly once.
+
+## Input:
+
+**Candidates:**
+
+1. {{candidate1}}
+2. {{candidate2}}
+3. {{candidate3}}
+4. {{candidate4}}
+5. {{candidate5}}
+
+## Output Format:
+
+Output only a five-digit string representing the ranks assigned to the candidates in their original order.
+
+The first digit represents the rank of Candidate 1, the second digit represents the rank of Candidate 2, and so on.
+
+Each digit must be a unique integer from 1 to 5, with no repetition.
+
+For example, `24153` means:
+
+- Candidate 1: Rank 2
+- Candidate 2: Rank 4
+- Candidate 3: Rank 1
+- Candidate 4: Rank 5
+- Candidate 5: Rank 3
+
+Do not output explanations, analysis, or any additional text. Only output the final five-digit ranking string.
